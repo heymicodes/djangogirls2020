@@ -1,47 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | DjangoGirls</title>
-</head>
-<body>
-    <header>
-        <h1>DjangoGirls - le blog</h1>
-        <p>Retrouvez toutes les actualités de DjangoGirls !</p>    
-    </header>
-    <main>
-        <section>
-            <h2>Les articles :</h2>
-            {% for post in posts %}
-            <article>
-                <header>
-                    <h3><a href="#">{{ post.title }}</a></h3>
-                </header>
-                <section>
-                    <p>
-                        {{ post.text|linebreaksbr }}
-                    </p>
-                    <a href="#">Lire la suite</a>
-                </section>
-                <footer>
-                    <p>publié le <time datetime="{{ post.published_date }}">{{ post.published_date }}</time></p>
-                </footer>
-            </article>
-            {% endfor %}
-        </section>
-        <section>
-            <h2>Les participantes :</h2>
-            <ol>
-                <li>Adeline</li>
-                <li>Nassera</li>
-                <li>Sylviane</li>
-                <li>Myriam</li>
-            </ol>
-        </section>
-    </main>
-    <footer>
-        <p>DjangoGirls - Paris | 2020 </p>
-    </footer>
-</body>
-</html>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% for post in posts %}
+                    <div class="post">
+                        <div class="date">
+                            <p>published: {{ post.published_date }}</p>
+                        </div>
+                        <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                        <p>{{ post.text|linebreaksbr }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
