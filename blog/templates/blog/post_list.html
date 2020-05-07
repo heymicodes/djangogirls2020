@@ -13,20 +13,22 @@
     <main>
         <section>
             <h2>Les articles :</h2>
+            {% for post in posts %}
             <article>
                 <header>
-                    <h3><a href="#">Mon titre</a></h3>
+                    <h3><a href="#">{{ post.title }}</a></h3>
                 </header>
                 <section>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro aliquam corrupti, assumenda accusantium et ipsum iure temporibus excepturi repellat odio quam nulla cum atque eius suscipit corporis praesentium asperiores voluptatibus.
+                        {{ post.text|linebreaksbr }}
                     </p>
                     <a href="#">Lire la suite</a>
                 </section>
                 <footer>
-                    <p>publié le <time datetime="2015-05-16 19:00">07.05.2020</time></p>
+                    <p>publié le <time datetime="{{ post.published_date }}">{{ post.published_date }}</time></p>
                 </footer>
             </article>
+            {% endfor %}
         </section>
         <section>
             <h2>Les participantes :</h2>
